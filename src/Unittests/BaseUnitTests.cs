@@ -1,4 +1,6 @@
 ﻿using Context;
+using Context.Settings;
+using Context.UnitOfWork;
 using NUnit.Framework;
 using Serilog;
 using System;
@@ -13,13 +15,17 @@ namespace UnitTest
     public class BaseUnitTests
     {
         protected ILogger log = Logger.ContextLog<BaseUnitTests>();
-    
+        protected MongoDBUnitOfWork MongoUoW = null;
+        protected MongoDBContext MongoContext = null;
 
-        [OneTimeSetUp]
+            [OneTimeSetUp]
         public async Task Setup()
         {
             Logger.InitLogger();
-     
+
+            MongoUoW = new MongoDBUnitOfWork();
+            MongoContext = MongoUoW.Context;
+
         }
 
         [Test]
