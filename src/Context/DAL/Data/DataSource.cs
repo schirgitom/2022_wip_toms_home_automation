@@ -1,4 +1,5 @@
 ﻿
+using Context.DAL.Data.Sources;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Entities;
 using System;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Context.DAL.Data
 {
-
+    [BsonDiscriminator(RootClass = true)]
+    [BsonKnownTypes(typeof(MQTTDatasource), typeof(ModbusDatasource))]
     public class DataSource : MongoDocument
     {
 
@@ -19,9 +21,9 @@ namespace Context.DAL.Data
             this.InitOneToMany(() => Internal_DataPoints);
         }
 
-    
-
         public Boolean Active { get; set; }
+
+        public String Name { get; set; }
 
         public Many<DataPoint> Internal_DataPoints { get; set; } = new();
 

@@ -1,4 +1,5 @@
 ﻿using Context.DAL.Alarming;
+using Context.DAL.Data.DataPoints;
 using Context.DAL.Visuals;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -11,6 +12,8 @@ using System.Threading.Tasks;
 
 namespace Context.DAL.Data
 {
+    [BsonDiscriminator(RootClass = true)]
+    [BsonKnownTypes(typeof(MQTTDataPoint), typeof(ModbusDataPoint))]
     public class DataPoint : MongoDocument
     {
 
@@ -28,9 +31,10 @@ namespace Context.DAL.Data
         public String Description { get; set; }
         public Dictionary<String, AlarmThreshold> AlarmThresholds { get; set; } = new();
 
-   //     [InverseSide]
-     //   public Many<DataSource> DataSources { get; set; }
+        //     [InverseSide]
+        //   public Many<DataSource> DataSources { get; set; }
 
+        public One<DataSource> DataSource { get; set; }
 
         public One<DataPointVisual> Internal_Visual { get; set; } = null;
 

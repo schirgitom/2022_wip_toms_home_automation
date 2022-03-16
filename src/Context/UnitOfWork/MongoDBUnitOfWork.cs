@@ -1,4 +1,7 @@
-﻿using Context.Repositories;
+﻿using Context.DAL.Data;
+using Context.Repositories;
+using Context.Repositories.Concrete;
+using Context.Repository;
 using Context.Settings;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -26,6 +29,30 @@ namespace Context.UnitOfWork
             get
             {
                 return new DataPointRepository(Context);
+            }
+        }
+        public IUserRepository Users
+        {
+            get
+            {
+                return new UserRepository(Context);
+            }
+        }
+
+
+        public IDataPointVisualizationRepository DataPointVisuals
+        {
+            get
+            {
+                return new DataPointVisualizationRepository(Context);
+            }
+        }
+
+        public IDatasourceRepository DataSources
+        {
+            get
+            {
+                return new DatasourceRepository(Context);
             }
         }
 
