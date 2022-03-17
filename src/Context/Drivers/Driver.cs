@@ -72,5 +72,15 @@ namespace Context.Drivers
             return null;
         }
 
+        public async Task<Dictionary<String, List<Measurement>>> NumericData()
+        {
+            return NumericMeasurements.ToDictionary(x => x.Key, y => y.Value.ToList());
+        }
+
+        public async Task<Dictionary<String, List<Measurement>>> BinaryData()
+        {
+            return BinaryMeasurements.ToDictionary(x => x.Key, y => y.Value.ToList());
+        }
+
     }
 }
