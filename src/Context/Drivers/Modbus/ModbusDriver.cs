@@ -56,7 +56,6 @@ namespace Context.Drivers
 
         public async override Task Connect()
         {
-            //   MqttClientAuthenticateResult result = await client.ConnectAsync(options, CancellationToken.None);
 
             IsConnected = Client.Connected;
 

@@ -18,6 +18,9 @@ namespace UnitTest
         protected MongoDBUnitOfWork MongoUoW = null;
         protected MongoDBContext MongoContext = null;
 
+        protected InfluxDBContext InfluxDBContext = null;
+        protected InfluxDBUnitOfWork InfluxDBUnitOfWork = null;
+
             [OneTimeSetUp]
         public async Task Setup()
         {
@@ -25,6 +28,9 @@ namespace UnitTest
 
             MongoUoW = new MongoDBUnitOfWork();
             MongoContext = MongoUoW.Context;
+
+            InfluxDBUnitOfWork = new InfluxDBUnitOfWork(MongoUoW);
+            InfluxDBContext = InfluxDBUnitOfWork.Context;
 
         }
 
