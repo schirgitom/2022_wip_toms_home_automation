@@ -56,5 +56,13 @@ namespace Context.UnitOfWork
             }
         }
 
+        public IAlarmListRepository AlarmList
+        {
+            get
+            {
+                return new AlarmListRepository(Context);
+            }
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Context
     {
         public MongoDBUnitOfWork MongoDB { get; private set; }
         public InfluxDBUnitOfWork InfluxDB { get; private set; }
-        //public DataAcquistion DataAcquistion { get; private set; }
+        public DataAcquistion DataAcquistion { get; private set; }
 
         public Authentication Authentication { get; private set; }
         private MonitoringFacade()
@@ -20,7 +20,7 @@ namespace Context
             MongoDB = new MongoDBUnitOfWork();
             InfluxDB = new InfluxDBUnitOfWork(MongoDB);
 
-            //  DataAcquistion = new DataAcquistion(MongoDB, InfluxDB);
+              DataAcquistion = new DataAcquistion(MongoDB, InfluxDB);
             Authentication = new Authentication(MongoDB);
 
         }
@@ -38,6 +38,11 @@ namespace Context
 
                 return _instance;
             }
+        }
+
+        public async Task Init()
+        {
+            DataAcquistion.Start();
         }
     }
 

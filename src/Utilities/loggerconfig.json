@@ -3,11 +3,11 @@
         "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Enrichers.Environment" ],
         "MinimumLevel": {
             "Default": "Verbose",
-            "Override": {
-                "Microsoft": "Warning",
-                "System": "Warning",
-                "Context.DataAcquisition": "Warning"
-            }
+          "Override": {
+            "Microsoft": "Verbose",
+            "System": "Verbose",
+            "Context.DataAcquisition": "Verbose"
+          }
         },
         "WriteTo": [
             {

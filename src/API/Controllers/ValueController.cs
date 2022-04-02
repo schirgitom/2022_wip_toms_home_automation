@@ -28,7 +28,7 @@ namespace DataCollector.Controllers
         private VisualsReturnModel CreateVisuals(DataPoint dp, Sample ms)
         {
 
-            if (dp.Visual != null)
+            if (dp.Visual != null && ms != null)
             {
 
                 if (dp.DataType == Context.DAL.Data.DataType.Boolean)

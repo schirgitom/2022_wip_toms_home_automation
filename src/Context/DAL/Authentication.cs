@@ -72,7 +72,7 @@ namespace Context.DAL
             {
                 var val = tokenHandler.ValidateToken(token, ValidationParams, out SecurityToken validatedToken);
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
