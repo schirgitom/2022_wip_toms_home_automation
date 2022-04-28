@@ -3,7 +3,9 @@ using API.ResponseModels;
 using Context;
 using Context.DAL;
 using Context.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Controllers
 {
@@ -31,6 +33,79 @@ namespace API.Controllers
             }
 
             return Unauthorized();
+        }
+
+
+        [HttpPost("CreateUser")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<User>> CreateUser([Required][FromBody] User cred)
+        {
+
+
+            User usr = await mongo.Users.InsertOrUpdateOneAsync(cred);
+
+
+            if (usr != null)
+            {
+
+
+                return usr;
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
+
+        [HttpGet("ListUsers")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<List<User>>> ListUsers()
+        {
+
+
+            List<User> usr = mongo.Users.FilterBy(x => true).ToList();
+
+
+            if (usr != null)
+            {
+
+
+                return usr;
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
+
+        [HttpGet("GetUser")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<User>> GetUser([Required][FromQuery] String id)
+        {
+
+
+            User usr = await mongo.Users.FindByIdAsync(id);
+
+
+            if (usr != null)
+            {
+
+
+                return usr;
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
     }
 }
