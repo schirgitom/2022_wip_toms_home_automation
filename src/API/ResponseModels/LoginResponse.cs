@@ -6,7 +6,7 @@ namespace API.ResponseModels
     {
         public User User { get; set; }
 
-        public AuthenticationInformation AuthenticationInformation { get; set; }
+        public AuthenticationInformation Authentication { get; set; }
 
     }
 }

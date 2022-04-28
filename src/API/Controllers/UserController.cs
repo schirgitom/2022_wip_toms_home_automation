@@ -26,7 +26,7 @@ namespace API.Controllers
             {
                 LoginResponse returnmodel = new LoginResponse();
                 returnmodel.User = usr;
-                returnmodel.AuthenticationInformation = token;
+                returnmodel.Authentication = token;
                 return returnmodel;
             }
 
